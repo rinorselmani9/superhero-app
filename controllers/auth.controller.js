@@ -1,6 +1,7 @@
 const userService = require('../services/user.service')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const emailService = require('../services/email.services')
 
 module.exports = {
     login: async(params) => {
@@ -38,6 +39,19 @@ module.exports = {
         const token = jwt.sign({_id:user._id},process.env.JWT_SECRETKEY)
         return token
 
+    },
+    forgotPassword: async(params) => {
+        const { email } = params
+
+        const user = await userService.findByEmail(email)
+
+        if(!user){
+            throw Error('Email does not exist!')
+        }
+
+        const token = jwt.sign({_id:user._id,exp:Math.floor(Date.now()/1000)+60*60*12},process.env.JWT_FORGOT_PASSWORD_SECRET)
+
+        return await emailService.sendForgotPasswordEmail(email,token)
     }
     
 }   
