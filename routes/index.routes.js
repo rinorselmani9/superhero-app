@@ -7,7 +7,10 @@ const userController = require('../controllers/user.controller')
 
 /* GET home page. */
 router.get('/', (req, res) => {
-    res.json(jsonResponse('ok'))
+    const data = {
+        name,
+        version
+    }
 })
 
 router.post('/login',fieldMiddleware.login,fieldMiddleware.validate, async(req,res) => {
