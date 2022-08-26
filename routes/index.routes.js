@@ -4,13 +4,16 @@ const router = express.Router()
 const authController = require('../controllers/auth.controller')
 const fieldMiddleware = require('../middlewares/field.middleware')
 const userController = require('../controllers/user.controller')
+const { name, version} = require('../package.json')
 
 /* GET home page. */
 router.get('/', (req, res) => {
+    
     const data = {
         name,
         version
     }
+    res.json(jsonResponse(data))
 })
 
 router.post('/login',fieldMiddleware.login,fieldMiddleware.validate, async(req,res) => {

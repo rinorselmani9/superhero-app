@@ -22,15 +22,18 @@ module.exports = {
         emailService.sendRegistrationEmail(email, token)
         return result._id
     },
+
     changePassword: async(password,id) => {
         const hashedPassword = await bcrypt.hash(password,parseInt(process.env.GEN_SALT))
         const result = await userService.updatePassword(id,hashedPassword)
         return result._id
     },
+
     verifyAccount: async(id) => {
         const result = await userService.verifyAccount(id)
         return result._id
     },
+    
     checkForAdmin: async() => {
         const admins = await userService.getAdmins()
         if(!admins){

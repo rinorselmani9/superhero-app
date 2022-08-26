@@ -9,7 +9,7 @@ const indexRouter = require('./routes/index.routes');
 const usersRouter = require('./routes/users.routes');
 const superheroRouter  = require('./routes/superhero.routes')
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -25,6 +25,13 @@ const userSchema = new mongoose.Schema(
     }
 )
 
+userSchema.post('save', function(error, doc, next) {
+    if (error.code === 11000) {
+      return next(new Error('This email address already exist!'));
+    } 
+    next();
+});
+
 const userModel = mongoose.model('users',userSchema)
 
 module.exports = userModel

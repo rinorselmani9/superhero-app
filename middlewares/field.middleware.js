@@ -31,7 +31,7 @@ const validators = {
     if(!errors.length){
       return next()
     }
-    res.json(jsonResponse(erros,false))
+    res.json(jsonResponse(errors,false))
   }
 
 }
